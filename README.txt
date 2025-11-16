@@ -71,6 +71,35 @@ flex_living/
 └── staticfiles/ (created automatically if needed)
 
 
+-----------------------------------------------------
+DEPLOYMENT & TEST LINKS
+-----------------------------------------------------
+
+Live Application (Render):
+- Home Page:        https://flex-app-5.onrender.com/
+- Dashboard:        https://flex-app-5.onrender.com/reviews/dashboard/
+API Endpoints:
+- Hostaway Reviews API (Normalized JSON):
+  https://flex-app-5.onrender.com/reviews/api/hostaway/
+- Google Reviews Demo (Mock):
+  https://flex-app-5.onrender.com/reviews/api/google-demo/
+- Import Hostaway Data:
+  https://flex-app-5.onrender.com/reviews/import-hostaway/
+
+Admin Panel:
+- Django Admin: https://flex-app-5.onrender.com/admin/
+  Username: admin
+  Password: adminadmin
+
+GitHub Repository (Source Code):
+https://github.com/nikisimaei00/Flex-App
+
+-----------------------------------------------------
+Notes:
+- All routes are live on Render.
+- Reviewer can click links to test UI, API, and dashboard functionality.
+- No additional setup required to view the running version.
+
 --------------------------------------------------
 3. LOCAL SETUP
 --------------------------------------------------
@@ -106,9 +135,4 @@ flex_living/
    Admin:             http://127.0.0.1:8000/admin/
 
 
---------------------------------------------------
-4. AI TOOL USED
---------------------------------------------------
 
-This project was developed with the assistance of:
-• ChatGPT (GPT-4.o)

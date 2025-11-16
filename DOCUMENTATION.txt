@@ -91,6 +91,3 @@ GET /reviews/property/        → Property reviews display
 GET /reviews/api/google-demo/ → Google review mock
 GET /admin/                   → Django admin
 
-------------------------------------------------------
-7. AI TOOL USED
-------------------------------------------------------
