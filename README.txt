@@ -1,61 +1,65 @@
 Flex Living – Reviews Dashboard
 ================================
 
-This project implements the Flex Living Reviews Dashboard assessment.
-It includes a mocked Hostaway integration, a full manager dashboard,
-a property review display page, and a demo Google Reviews API endpoint.
+This project is an implementation of the Flex Living Reviews Dashboard
+assessment. It includes:
+
+• Mocked Hostaway reviews integration  
+• A full manager dashboard  
+• Per-property performance analytics  
+• Review approval workflow  
+• Public property review display  
+• Google Reviews exploration (mock endpoint)
+
+The system provides a modern, clean UI inspired by Flex Living’s brand.
 
 
------------------------------------------------------
+--------------------------------------------------
 1. FEATURES
------------------------------------------------------
+--------------------------------------------------
 
 1) Hostaway Integration (Mocked)
-   - Reads hostaway_mock.json
-   - Normalizes reviews (listing, guest, ratings, date)
-   - API endpoint:
+   • The provided Hostaway API sandbox contains no real review data.
+   • The project uses the supplied mock JSON file (hostaway_mock.json).
+   • Reviews are normalized and exposed through:
        /reviews/api/hostaway/
 
 2) Manager Dashboard
-   URL:
-       /reviews/dashboard/
+   URL: /reviews/dashboard/
 
-   Features:
-   - Per-property performance analytics
-   - Filters: category, date range, minimum rating
-   - Sorting: newest or highest rating
-   - Highlights recurring issues (cleanliness, communication, rules)
-   - Approve / Reject review flow
-   - Modern UI inspired by Flex Living brand
+   Dashboard features:
+   • Sort by date or rating
+   • Filter by category, minimum rating, or date range
+   • Automatic detection of recurring issues
+   • Ability to approve / hide reviews
+   • Per-property analytics table
+   • Clean UI with responsive layout
 
-3) Property Page Review Display
-   URL:
+3) Property Review Display
+   URL example:
        /reviews/property/?name=PROPERTY_NAME
 
-   Shows only approved reviews.
+   • Shows only approved reviews
+   • Matches simplified Flex Living property layout
 
-4) Google Reviews Exploration (Mock)
-   URL:
-       /reviews/api/google-demo/
+4) Google Reviews (Exploration)
+   • A mock endpoint is provided at /reviews/api/google-demo/
+   • Real Google API requires billing; not usable for this assessment.
 
-   Google Places API cannot be used without billing.
-   Therefore a realistic mock response is provided.
-
-
------------------------------------------------------
+--------------------------------------------------
 2. PROJECT STRUCTURE
------------------------------------------------------
+--------------------------------------------------
+
 flex_living/
 │   manage.py
 │   requirements.txt
 │
-├── flex_living/              (Django project)
+├── flex_living/
 │   ├── settings.py
 │   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
+│   └── wsgi.py
 │
-├── reviews/                  (Main dashboard app)
+├── reviews/
 │   ├── models.py
 │   ├── views.py
 │   ├── urls.py
@@ -64,55 +68,47 @@ flex_living/
 │   ├── templates/reviews/property_page.html
 │   └── templates/home.html
 │
-└── static/                   (assets if needed)
+└── staticfiles/ (created automatically if needed)
 
 
------------------------------------------------------
+--------------------------------------------------
 3. LOCAL SETUP
------------------------------------------------------
+--------------------------------------------------
 
-1) Clone repo
-   git clone <your-repo-url>
+1) Clone repository:
+   git clone <your-github-repo-url>
    cd flex_living
 
-2) Create virtual environment
+2) Create virtual environment:
    python3 -m venv venv
    source venv/bin/activate
 
-3) Install dependencies
+3) Install dependencies:
    pip install -r requirements.txt
 
-4) Run migrations
+4) Run migrations:
    python manage.py migrate
 
-5) Import mocked Hostaway reviews (optional)
+5) Import mocked Hostaway reviews (optional):
    python manage.py import_hostaway
-   OR open browser at /reviews/import-hostaway/
+   OR open in browser:
+   http://127.0.0.1:8000/reviews/import-hostaway/
 
-6) Start server
+6) Start server:
    python manage.py runserver
 
-
------------------------------------------------------
-4. RUNNING VERSION (DEPLOYMENT)
------------------------------------------------------
-
-Add this once deployed on Railway:
-https://yourproject.up.railway.app
-
-
------------------------------------------------------
-5. API ENDPOINTS
------------------------------------------------------
-
-/reviews/api/hostaway/         → Normalized Hostaway data
-/reviews/api/google-demo/      → Mocked Google Reviews
-/reviews/dashboard/            → Manager dashboard
-/reviews/property/             → Approved reviews per listing
+7) Open pages in browser:
+   Home:              http://127.0.0.1:8000/
+   Dashboard:         http://127.0.0.1:8000/reviews/dashboard/
+   Property page:     http://127.0.0.1:8000/reviews/property/?name=NAME
+   Hostaway API:      http://127.0.0.1:8000/reviews/api/hostaway/
+   Google demo API:   http://127.0.0.1:8000/reviews/api/google-demo/
+   Admin:             http://127.0.0.1:8000/admin/
 
 
------------------------------------------------------
-6. LICENSE
------------------------------------------------------
+--------------------------------------------------
+4. AI TOOL USED
+--------------------------------------------------
 
-This was created for an assessment. Not licensed for production.
+This project was developed with the assistance of:
+• ChatGPT (GPT-4.o)
