@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex Living – Reviews Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- external CSS instead of inline <style> -->
+    <link rel="stylesheet" href="{% static 'reviews/css/dashboard.css' %}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="navbar-logo">
+            <span class="icon">f</span> Flex Living Reviews
+        </div>
+        <div>Manager Dashboard</div>
+    </div>
+
+    <div class="page">
+
+        <h1 class="page-title">Reviews Dashboard</h1>
+        <p class="page-subtitle">Monitor performance, spot issues early, and control what appears on the website.</p>
+
+        <!-- TOP STATS -->
+        <div class="stats-grid">
+            <div class="card">
+                <div class="card-title">Total Reviews</div>
+                <div class="card-value">{{ reviews|length }}</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Average Rating</div>
+                <div class="card-value">
+                    {% if reviews %}
+                        {{ reviews.0.overall_rating|default:0 }}
+                    {% else %}
+                        –
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Properties</div>
+                <div class="card-value">{{ property_stats|length }}</div>
+            </div>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="card" style="margin-bottom: 24px;">
+            <form method="GET">
+                <div class="filters-row">
+
+                    <div class="filter-group">
+                        <label>Sort by</label>
+                        <select name="sort_by">
+                            <option value="date" {% if sort_by == "date" %}selected{% endif %}>Newest first</option>
+                            <option value="rating" {% if sort_by == "rating" %}selected{% endif %}>Rating high → low</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Category</label>
+                        <select name="category">
+                            <option value="overall" {% if category == "overall" %}selected{% endif %}>Overall</option>
+                            <option value="cleanliness" {% if category == "cleanliness" %}selected{% endif %}>Cleanliness</option>
+                            <option value="communication" {% if category == "communication" %}selected{% endif %}>Communication</option>
+                            <option value="rules" {% if category == "rules" %}selected{% endif %}>House Rules</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Min Rating</label>
+                        <select name="min_rating">
+                            <option value="" {% if not min_rating %}selected{% endif %}>All</option>
+                            <option value="7" {% if min_rating == "7" %}selected{% endif %}>7+</option>
+                            <option value="8" {% if min_rating == "8" %}selected{% endif %}>8+</option>
+                            <option value="9" {% if min_rating == "9" %}selected{% endif %}>9+</option>
+                            <option value="10" {% if min_rating == "10" %}selected{% endif %}>10</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>From Date</label>
+                        <input type="date" name="start_date" value="{{ start_date }}">
+                    </div>
+
+                    <div class="filter-group">
+                        <label>To Date</label>
+                        <input type="date" name="end_date" value="{{ end_date }}">
+                    </div>
+
+                    <div class="filter-group">
+                        <label>&nbsp;</label>
+                        <button class="btn-primary" type="submit">Apply</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- PROPERTY PERFORMANCE -->
+        <div class="card" style="margin-bottom: 24px;">
+            <h3 class="card-title">Per-Property Performance</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Avg Rating</th>
+                        <th>Reviews</th>
+                        <th>Clean</th>
+                        <th>Comm</th>
+                        <th>Rules</th>
+                        <th>Issues</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in property_stats %}
+                    <tr>
+                        <td>{{ p.listing_name }}</td>
+                        <td>{{ p.avg_rating|floatformat:1 }}</td>
+                        <td>{{ p.review_count }}</td>
+                        <td>{{ p.avg_cleanliness|floatformat:1 }}</td>
+                        <td>{{ p.avg_communication|floatformat:1 }}</td>
+                        <td>{{ p.avg_rules|floatformat:1 }}</td>
+                        <td>
+                            {% if p.issues %}
+                                {% for issue in p.issues %}
+                                    <span class="pill pill-grey">Low {{ issue }}</span>
+                                {% endfor %}
+                            {% else %}
+                                <span class="pill pill-green">OK</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="7">No data.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ALL REVIEWS -->
+        <div class="card">
+            <h3 class="card-title">All Reviews</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Guest</th>
+                        <th>Rating</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in reviews %}
+                    <tr>
+                        <td>{{ r.listing_name }}</td>
+                        <td>{{ r.guest_name }}</td>
+                        <td>{{ r.overall_rating }}</td>
+                        <td>{{ r.submitted_at|date:"Y-m-d" }}</td>
+                        <td>
+                            {% if r.approved %}
+                                <span class="pill pill-green">Approved</span>
+                            {% else %}
+                                <span class="pill pill-grey">Hidden</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ r.id }}">
+                                <button class="btn-ghost btn-ghost-approve" name="action" value="approve">Approve</button>
+                            </form>
+                            <form method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ r.id }}">
+                                <button class="btn-ghost btn-ghost-reject" name="action" value="reject">Reject</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6">No reviews available.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>

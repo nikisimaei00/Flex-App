@@ -1,0 +1,100 @@
+{
+  "status": "success",
+  "result": [
+    {
+      "id": 7453,
+      "type": "host-to-guest",
+      "status": "published",
+      "rating": null,
+      "publicReview": "Shane and family are wonderful! Would definitely host again :)",
+      "reviewCategory": [
+        { "category": "cleanliness", "rating": 10 },
+        { "category": "communication", "rating": 10 },
+        { "category": "respect_house_rules", "rating": 10 }
+      ],
+      "submittedAt": "2020-08-21 22:45:14",
+      "guestName": "Shane Finkelstein",
+      "listingName": "2B N1 A - 29 Shoreditch Heights"
+    },
+
+    {
+      "id": 8120,
+      "type": "host-to-guest",
+      "status": "published",
+      "rating": 9,
+      "publicReview": "Emily was incredibly respectful and left the apartment spotless. We'd be glad to host her again!",
+      "reviewCategory": [
+        { "category": "cleanliness", "rating": 9 },
+        { "category": "communication", "rating": 10 },
+        { "category": "respect_house_rules", "rating": 10 }
+      ],
+      "submittedAt": "2021-03-14 14:22:10",
+      "guestName": "Emily Carter",
+      "listingName": "City View Loft - Camden"
+    },
+
+    {
+      "id": 9032,
+      "type": "host-to-guest",
+      "status": "published",
+      "rating": 7,
+      "publicReview": "Liam was friendly and easy to communicate with. Followed all rules, just left a bit of clutter behind.",
+      "reviewCategory": [
+        { "category": "cleanliness", "rating": 7 },
+        { "category": "communication", "rating": 8 },
+        { "category": "respect_house_rules", "rating": 9 }
+      ],
+      "submittedAt": "2022-06-02 09:10:45",
+      "guestName": "Liam Rodriguez",
+      "listingName": "Modern Studio - Shoreditch"
+    },
+
+    {
+      "id": 10544,
+      "type": "host-to-guest",
+      "status": "published",
+      "rating": null,
+      "publicReview": "Sarah was an exceptional guest. Quiet, polite, and kept the place in perfect condition.",
+      "reviewCategory": [
+        { "category": "cleanliness", "rating": 10 },
+        { "category": "communication", "rating": 9 },
+        { "category": "respect_house_rules", "rating": 10 }
+      ],
+      "submittedAt": "2023-01-18 18:32:59",
+      "guestName": "Sarah Mitchell",
+      "listingName": "Riverside Apartment - South Bank"
+    },
+
+    {
+      "id": 11908,
+      "type": "host-to-guest",
+      "status": "published",
+      "rating": 8,
+      "publicReview": "Oliver was a great guest overall. Good communication and respectful of the flat.",
+      "reviewCategory": [
+        { "category": "cleanliness", "rating": 8 },
+        { "category": "communication", "rating": 9 },
+        { "category": "respect_house_rules", "rating": 7 }
+      ],
+      "submittedAt": "2023-11-09 11:05:30",
+      "guestName": "Oliver Chen",
+      "listingName": "Luxury 1BR - Canary Wharf"
+    },
+
+    {
+      "id": 13022,
+      "type": "host-to-guest",
+      "status": "published",
+      "rating": 10,
+      "publicReview": "Maya was a dream guest! Highly respectful and left the flat in immaculate condition.",
+      "reviewCategory": [
+        { "category": "cleanliness", "rating": 10 },
+        { "category": "communication", "rating": 10 },
+        { "category": "respect_house_rules", "rating": 10 }
+      ],
+      "submittedAt": "2024-07-27 16:12:00",
+      "guestName": "Maya Singh",
+      "listingName": "Penthouse Suite - Kensington"
+    }
+  ]
+}

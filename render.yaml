@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: flex-living-reviews
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn flex_living.wsgi:application
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10

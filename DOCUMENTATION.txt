@@ -1,0 +1,146 @@
+Flex Living – Reviews Dashboard
+Technical Documentation
+====================================
+
+------------------------------------------------------
+1. TECH STACK
+------------------------------------------------------
+
+Backend:
+- Python 3.x
+- Django 5.2
+- SQLite (local)
+- Gunicorn + WhiteNoise (for deployment)
+
+Frontend:
+- HTML5, CSS3
+- Modern Normalize CSS
+- Custom Flex Living–style UI
+
+Deployment:
+- Railway (optional running version)
+- GitHub repository
+
+
+------------------------------------------------------
+2. KEY DESIGN & LOGIC DECISIONS
+------------------------------------------------------
+
+HOSTAWAY INTEGRATION:
+- The provided Hostaway API key cannot return real review data.
+- Requests return:
+  {"status": "fail", "message": "The resource owner or authorization server denied the request."}
+
+Because of this, the project uses:
+- Provided JSON mock file (hostaway_mock.json)
+- Parsed and normalized into Django database
+- Exposed via API: /reviews/api/hostaway/
+
+This fulfills the requirement:
+“You must implement an API route that returns structured, usable data.”
+
+UI DESIGN:
+- Clean, minimal, based on Flex Living brand colours
+- Card layout
+- Emphasis on readability and manager usability
+
+
+------------------------------------------------------
+3. DASHBOARD FUNCTIONALITIES
+------------------------------------------------------
+
+FILTERS:
+- Category (overall, cleanliness, communication, rules)
+- Minimum rating
+- Date range (from and to)
+- Sort by rating or newest
+
+PROPERTY ANALYTICS:
+- Average rating per property
+- Review counts
+- Category averages
+- Automatic issue detection (avg < 8)
+
+APPROVE/REJECT WORKFLOW:
+- Approve → appears on property page
+- Reject → stays hidden
+- Manager controls visibility
+
+TRENDS & ISSUES:
+- Category scores below 8 flagged:
+  “Low cleanliness”, “Low communication”, etc.
+
+UI:
+- Matches Flex Living tone (green & cream palette)
+- Fully responsive
+
+
+------------------------------------------------------
+4. API BEHAVIOR
+------------------------------------------------------
+
+HOSTAWAY MOCK:
+Endpoint:
+    /reviews/api/hostaway/
+
+Returns:
+{
+  "reviews": [
+    {
+      "id": 7453,
+      "listing_name": "2B N1 A - 29 Shoreditch Heights",
+      "guest_name": "John Doe",
+      "submitted_at": "2020-08-21 22:45:14",
+      "public_review": "...",
+      "categories": [...]
+    }
+  ]
+}
+
+GOOGLE REVIEWS MOCK:
+Endpoint:
+    /reviews/api/google-demo/
+
+Due to API limitations (billing required), a mock response is used.
+
+
+------------------------------------------------------
+5. GOOGLE REVIEWS FINDINGS
+------------------------------------------------------
+
+- Google Places API requires a billing-enabled account.
+- Fetching reviews without billing returns PERMISSION_DENIED.
+- Therefore real Google Reviews cannot be pulled in an assessment.
+- A structured mock endpoint is provided instead.
+
+This is documented clearly as required.
+
+
+------------------------------------------------------
+6. HOW TO RUN LOCALLY
+------------------------------------------------------
+
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+
+
+------------------------------------------------------
+7. RUNNING VERSION (DEPLOYMENT)
+------------------------------------------------------
+
+Add your Railway URL when deployed:
+https://yourproject.up.railway.app
+
+
+------------------------------------------------------
+8. FINAL NOTES
+------------------------------------------------------
+
+- All assessment requirements implemented.
+- Dashboard complete and fully functional.
+- API route implemented and normalized.
+- UI matches Flex Living’s design principles.
+- Google API limitations investigated & documented.

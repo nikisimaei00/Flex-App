@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flex Living – Manager Portal</title>
+
+    <!-- Link shared UI stylesheet -->
+    <link rel="stylesheet" href="{% static 'reviews/css/dashboard.css' %}">
+
+    <style>
+        /* Page-specific tweaks */
+        .home-wrapper {
+            max-width: 900px;
+            margin: 60px auto;
+            text-align: left;
+            padding: 0 16px;
+        }
+
+        .home-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--green-dark);
+        }
+
+        .home-subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .home-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+        }
+
+        .btn-main {
+            padding: 12px 28px;
+            background: var(--green-light);
+            color: white;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.2s ease;
+        }
+
+        .btn-main:hover {
+            background: var(--green-dark);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR (same as dashboard) -->
+    <div class="navbar">
+        <div class="navbar-logo">
+            <span class="icon">f</span> Flex Living Reviews
+        </div>
+        <div>Manager Portal</div>
+    </div>
+
+    <div class="home-wrapper">
+
+        <h1 class="home-title">Welcome Back 👋</h1>
+        <p class="home-subtitle">
+            Manage reviews, monitor property performance, and control what appears on the website.
+        </p>
+
+        <div class="home-card">
+            <h2 style="margin-top:0;">Reviews Dashboard</h2>
+            <p style="color:#555; margin-bottom:25px;">
+                View, approve, and analyse reviews across all Flex Living properties.
+                Access filtering tools, analytics, and per-property insights.
+            </p>
+
+            <a href="{% url 'dashboard' %}" class="btn-main">Open Dashboard</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
